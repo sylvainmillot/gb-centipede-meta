@@ -5,12 +5,11 @@
 #include "AI.h"
 #include "Display.h"
 
-
+uint8_t stateOfGame;
 
 int h = gb.display.width() / 2;
 int v = gb.display.height() - 3;
 int score = 0;
-
 
 CentipedeBlock centipede[NB_BLOCKS];
 Mushroom mushrooms[NB_MUSHROOMS_MAX];
@@ -19,6 +18,8 @@ Player player;
 
 void setup() {
   gb.begin();
+
+  stateOfGame = HOME_STATE;
 
   initGame();
 }
@@ -51,15 +52,30 @@ void loop() {
     initGame();
   }
 
-
-  runAI(player, centipede, mushrooms);
-  controls(player);
-  draw(player, centipede, mushrooms, score);
-
-  testCollisions();
-
-  if(centipedeDead()) {
-    spawnCentipede();
+  switch(stateOfGame) {
+    case HOME_STATE:
+      stateOfGame = drawMenu();
+      break;
+      
+    case LAUNCH_PLAY_STATE:
+      initGame();
+      stateOfGame = PLAY_STATE;
+      break;
+      
+    case PLAY_STATE:
+      stateOfGame = gameCommands();
+    
+      runAI(player, centipede, mushrooms);
+      controls(player);
+      draw(player, centipede, mushrooms, score);
+    
+      testCollisions();
+    
+      if(centipedeDead()) {
+        spawnCentipede();
+      }
+      
+      break;
   }
 }
 

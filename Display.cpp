@@ -14,6 +14,19 @@ void draw(Player &player, CentipedeBlock * centipede, Mushroom * mushrooms, int 
   drawScore(score);
 }
 
+const uint8_t drawMenu() {
+  const char* items[] = {
+    "Play"
+  };
+
+  const uint8_t indexItem = gb.gui.menu("Centipede META", items);
+  uint8_t choice = HOME_STATE;
+  if(items[indexItem] == "Play") {
+    choice = LAUNCH_PLAY_STATE;
+  }
+  return choice;
+}
+
 void drawBackground() {
   gb.display.setColor(GREEN);
   gb.display.fillRect(0,0,gb.display.width(),gb.display.height());

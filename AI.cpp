@@ -2,7 +2,7 @@
 
 void runAI(Player &player, CentipedeBlock * centipede, Mushroom * mushrooms) {
   moveBullets(player);
-  if(gb.frameCount % 2 == 0) {
+  if(gb.frameCount % 1 == 0) {
     moveCentipede(centipede, mushrooms);
   }
 }

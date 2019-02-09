@@ -7,6 +7,10 @@ int playerHLimitLeft = 1;
 
 int speed = 2;
 
+const uint8_t gameCommands() {
+  return (gb.buttons.pressed(BUTTON_MENU) ? HOME_STATE : PLAY_STATE);
+}
+
 void controls(Player &player) {
   movePlayer(player);
 }
