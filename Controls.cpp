@@ -52,6 +52,11 @@ void movePlayer(Player &player) {
 }
 
 void spawnBullet(Player &player, int i) {
+  gb.lights.drawPixel(0, 2, BLUE);
+  gb.lights.drawPixel(0, 3, BLUE);
+  gb.lights.drawPixel(1, 2, BLUE);
+  gb.lights.drawPixel(2, 3, BLUE);
+  
   player.bullets[i].enabled = true;
   player.bullets[i].point.x = player.point.x + 2;
   player.bullets[i].point.y = player.point.y - 3;
