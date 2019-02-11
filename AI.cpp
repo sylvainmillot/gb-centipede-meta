@@ -1,10 +1,8 @@
 #include "AI.h"
 
-void runAI(Player &player, CentipedeBlock * centipede, Mushroom * mushrooms) {
+void runAI(Player &player, CentipedeBlock * centipede, Mushroom * mushrooms, int &level) {
   moveBullets(player);
-  if(gb.frameCount % 1 == 0) {
-    moveCentipede(centipede, mushrooms);
-  }
+  moveCentipede(centipede, mushrooms, level);
 }
 
 void moveBullets(Player &player) {
@@ -19,7 +17,7 @@ void moveBullets(Player &player) {
   }
 }
 
-void moveCentipede(CentipedeBlock * centipede, Mushroom * mushrooms) {
+void moveCentipede(CentipedeBlock * centipede, Mushroom * mushrooms, int &level) {
   // For each Centipede block
   for(int i=0; i<NB_BLOCKS; i++) {
     bool dontMoveX = false;

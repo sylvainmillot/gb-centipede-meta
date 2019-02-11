@@ -1,10 +1,11 @@
 #include "Game.h"
 
-const uint8_t globalGame(Player &player, CentipedeBlock * centipede, Mushroom * mushrooms, int &score, int &lives) {
+const uint8_t globalGame(Player &player, CentipedeBlock * centipede, Mushroom * mushrooms, int &score, int &lives, int &level) {
   testCollisionsBullets(player, centipede, mushrooms, score);
 
   if(centipedeDead(centipede)) {
     spawnCentipede(centipede);
+    level++;
   }
 
   if(playerHitted(player, centipede)) {

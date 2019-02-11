@@ -12,6 +12,7 @@ int h = gb.display.width() / 2;
 int v = gb.display.height() - 3;
 int score = 0;
 int lives = 0;
+int level = 1;
 
 CentipedeBlock centipede[NB_BLOCKS];
 Mushroom mushrooms[NB_MUSHROOMS_MAX];
@@ -28,6 +29,7 @@ void setup() {
 
 void initGame() {
   score = 0;
+  level = 1;
   lives = MAX_LIVES;
   
   spawnCentipede(centipede);
@@ -69,10 +71,10 @@ void loop() {
     case PLAY_STATE:
       stateOfGame = gameCommands();
     
-      runAI(player, centipede, mushrooms);
+      runAI(player, centipede, mushrooms, level);
       controls(player);
       draw(player, centipede, mushrooms, score, lives);
-      stateOfGame = globalGame(player, centipede, mushrooms, score, lives);
+      stateOfGame = globalGame(player, centipede, mushrooms, score, lives, level);
       
       break;
   }
