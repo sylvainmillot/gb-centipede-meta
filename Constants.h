@@ -33,8 +33,8 @@ const int NB_MUSHROOMS_MAX = 150;
 
 
 struct Point {
-  int16_t x;      
-  int16_t y;      
+  float x;      
+  float y;      
 };
 
 struct PlayerBullet {
