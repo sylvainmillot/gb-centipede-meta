@@ -4,7 +4,16 @@
 #include "Controls.h"
 #include "AI.h"
 #include "Game.h"
+#include "Highscore.h"
 #include "Display.h"
+
+extern const char g_highScoreName[] = "";
+HighScore<int, 6, 13, g_highScoreName> g_highScore;
+#define SAVE_HIGHSCORE 0
+
+const SaveDefault savefileDefaults[] = {
+  { SAVE_HIGHSCORE, SAVETYPE_BLOB, sizeof(g_highScore), 0 }
+};
 
 uint8_t stateOfGame;
 
@@ -22,6 +31,11 @@ Player player;
 void setup() {
   gb.begin();
 
+  gb.save.config(savefileDefaults);
+  gb.save.get(SAVE_HIGHSCORE, g_highScore);
+  g_highScore.setTextColor(YELLOW);
+  g_highScore.setBgColor(BLACK);
+
   stateOfGame = HOME_STATE;
 
   initGame();
@@ -30,7 +44,7 @@ void setup() {
 void initGame() {
   score = 0;
   level = 1;
-  lives = MAX_LIVES;
+  lives = 3;
   
   spawnCentipede(centipede);
 
@@ -77,7 +91,32 @@ void loop() {
       stateOfGame = globalGame(player, centipede, mushrooms, score, lives, level);
       
       break;
-  }
   
-  //gb.lights.fill(BLACK);
+    case ENDGAME_STATE:
+      {
+        bool newHighScore = g_highScore.checkHighScore(score);
+        g_highScore.showScore(score);
+        if (newHighScore)  {
+          g_highScore.updateHighscore(score);
+          gb.save.set( SAVE_HIGHSCORE, g_highScore);
+        }
+        g_highScore.drawHighScores();
+  
+        if (gb.buttons.pressed(BUTTON_A) || gb.buttons.pressed(BUTTON_B) || gb.buttons.pressed(BUTTON_MENU)) {
+          stateOfGame = HOME_STATE;
+        }
+      }
+      
+      
+      break;
+
+    case HIGHSCORES_STATE:
+      g_highScore.drawHighScores();
+
+      if (gb.buttons.pressed(BUTTON_B)) {
+        stateOfGame = HOME_STATE;
+      }
+      
+      break;
+  }
 }

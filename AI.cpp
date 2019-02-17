@@ -40,7 +40,7 @@ void moveCentipede(CentipedeBlock * centipede, Mushroom * mushrooms, int &level)
     }
 
     if(!dontMoveX) {
-      centipede[i].point.x+= centipede[i].direction.x * CENTIPEDE_SPEED_X;
+      centipede[i].point.x+= centipede[i].direction.x * CENTIPEDE_SPEED_X * level;
     }
   }
 }

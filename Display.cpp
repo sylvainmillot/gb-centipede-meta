@@ -16,13 +16,16 @@ void draw(Player &player, CentipedeBlock * centipede, Mushroom * mushrooms, int 
 
 const uint8_t drawMenu() {
   const char* items[] = {
-    "Play"
+    "Play", "High scores"
   };
 
   const uint8_t indexItem = gb.gui.menu("Centipede META", items);
   uint8_t choice = HOME_STATE;
   if(items[indexItem] == "Play") {
     choice = LAUNCH_PLAY_STATE;
+  }
+  if(items[indexItem] == "High scores") {
+    choice = HIGHSCORES_STATE;
   }
   return choice;
 }

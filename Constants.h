@@ -4,6 +4,8 @@
 const uint8_t HOME_STATE = 1;
 const uint8_t LAUNCH_PLAY_STATE = 2;
 const uint8_t PLAY_STATE = 3;
+const uint8_t ENDGAME_STATE = 4;
+const uint8_t HIGHSCORES_STATE = 5;
 
 const uint8_t PLAYER_WIDTH = 5;
 const uint8_t PLAYER_HEIGHT = 6;

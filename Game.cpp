@@ -22,7 +22,7 @@ const uint8_t globalGame(Player &player, CentipedeBlock * centipede, Mushroom * 
     spawnCentipede(centipede);
 
     if(lives == 0) {
-      return HOME_STATE;
+      return ENDGAME_STATE;
     }
   }
 
